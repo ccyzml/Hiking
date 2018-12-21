@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_friends"
+            android:icon="@mipmap/friends"
+            android:title="我的好友" />
+        <item
+            android:id="@+id/nav_ended_event"
+            android:icon="@mipmap/ended_sports"
+            android:title="过往活动" />
+        <item
+            android:id="@+id/nav_collection"
+            android:icon="@mipmap/collection"
+            android:title="我的收藏" />
+    </group>
+
+    <item android:title="系统设置">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@mipmap/share"
+                android:title="分享" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@mipmap/logout"
+                android:title="退出登陆" />
+        </menu>
+    </item>
+
+</menu>
