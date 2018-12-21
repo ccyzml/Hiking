@@ -11,9 +11,10 @@
         android:orientation="vertical">
 
         <ImageView
+            android:background="@drawable/bg_border_stroke"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:src="@color/colorPrimary"/>
+            android:src="@mipmap/error_default"/>
 
 
         <FrameLayout

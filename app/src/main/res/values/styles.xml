@@ -17,4 +17,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="PinkBtnTheme" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/btn_bg</item>
+    </style>
+
+    <style name="WhiteEditTextTheme">
+        <item name="android:background">@drawable/bg_edit_text</item>
+        <item name="android:cursorVisible">false</item>
+    </style>
 </resources>

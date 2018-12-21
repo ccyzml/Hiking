@@ -14,6 +14,7 @@ public class Event implements Serializable {
     private EventMember[] waitingMembers;
     private EventMember[] joinedMembers;
     private EventMember[] rejectedMembers;
+    private long ownerId;
 
     public long getId() {
         return id;
@@ -101,5 +102,13 @@ public class Event implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 }

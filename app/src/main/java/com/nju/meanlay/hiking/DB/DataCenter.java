@@ -32,6 +32,11 @@ public class DataCenter {
         for (int i = 0; i < 10; i++) {
             Event event = new Event();
             event.setTitle("Hiking!!!!!!!!");
+            if(i == 0) {
+                event.setDate("2019-1-1");
+            }else {
+                event.setDate("2019-1-2");
+            }
             event.setJoinedMembers(joinedMembers);
             event.setWaitingMembers(waitingMembers);
             events[i] = event;

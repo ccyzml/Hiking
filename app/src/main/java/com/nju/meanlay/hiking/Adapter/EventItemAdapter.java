@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.nju.meanlay.hiking.Interface.OnRecyclerItemClickListener;
 import com.nju.meanlay.hiking.Model.Event;
 import com.nju.meanlay.hiking.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

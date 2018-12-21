@@ -4,42 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_event_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="今天的活动"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/colorPrimary"
-            android:layout_marginBottom="3dp"/>
-
-        <ImageView
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:src="@mipmap/error_default"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="将发生的活动"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/colorPrimary"
-            android:layout_marginBottom="3dp"/>
-    </LinearLayout>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 
 </FrameLayout>

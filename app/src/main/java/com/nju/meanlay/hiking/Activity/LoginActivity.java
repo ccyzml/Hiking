@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.nju.meanlay.hiking.App;
+import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
 
 public class LoginActivity extends BaseActivity {
@@ -27,9 +29,17 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 loginProgressBar.setVisibility(View.VISIBLE);
-                    loginProgressBar.setVisibility(View.INVISIBLE);
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
+                loginProgressBar.setVisibility(View.INVISIBLE);
+                User user = new User();
+                user.setNickName("Meanlay");
+                user.setUniversity("南京大学");
+                user.setCollege("软件学院");
+                user.setIntroduction("haahahahahahahah");
+                App.getInstance().setUser(user);
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+
+
             }
         });
 

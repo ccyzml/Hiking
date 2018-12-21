@@ -10,11 +10,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nju.meanlay.hiking.Adapter.MyFragmentPageAdapter;
+import com.nju.meanlay.hiking.App;
+import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
 
 public class MainActivity extends AppCompatActivity
@@ -23,6 +28,9 @@ public class MainActivity extends AppCompatActivity
     private MyFragmentPageAdapter pagerAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private TextView userNameTV;
+    private TextView userUniversityTV;
+    private TextView userIntroductionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +57,21 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorWhite));
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        View v  = navigationView.getHeaderView(0);
+        userNameTV = v.findViewById(R.id.user_name_main);
+        userUniversityTV = v.findViewById(R.id.user_university_main);
+        userIntroductionTV = v.findViewById(R.id.user_introduction_main);
+        setUserInfo();
     }
+
+    private void setUserInfo() {
+        User user = App.getInstance().getUser();
+        userNameTV.setText(user.getNickName());
+        userIntroductionTV.setText(user.getIntroduction());
+        userUniversityTV.setText(user.getUniversity());
+    }
+
 
     @Override
     public void onBackPressed() {
