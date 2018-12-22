@@ -1,6 +1,7 @@
 package com.nju.meanlay.hiking.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,10 +18,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.nju.meanlay.hiking.Adapter.MyFragmentPageAdapter;
 import com.nju.meanlay.hiking.App;
 import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private TextView userNameTV;
     private TextView userUniversityTV;
     private TextView userIntroductionTV;
+    private CircleImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         userNameTV = v.findViewById(R.id.user_name_main);
         userUniversityTV = v.findViewById(R.id.user_university_main);
         userIntroductionTV = v.findViewById(R.id.user_introduction_main);
+        avatar = v.findViewById(R.id.avatar_main);
         setUserInfo();
     }
 
@@ -70,6 +76,7 @@ public class MainActivity extends AppCompatActivity
         userNameTV.setText(user.getNickName());
         userIntroductionTV.setText(user.getIntroduction());
         userUniversityTV.setText(user.getUniversity());
+        Glide.with(this).load(Integer.valueOf(user.getAvatarUrl())).centerCrop().into(avatar);
     }
 
 
@@ -114,7 +121,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_friends) {
-            Toast.makeText(this,"还在开发",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,MyFriendsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_ended_event) {
             Toast.makeText(this,"还在开发",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_collection) {

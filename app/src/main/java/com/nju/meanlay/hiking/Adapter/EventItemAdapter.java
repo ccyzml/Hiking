@@ -1,6 +1,7 @@
 package com.nju.meanlay.hiking.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.nju.meanlay.hiking.App;
 import com.nju.meanlay.hiking.Interface.OnRecyclerItemClickListener;
 import com.nju.meanlay.hiking.Model.Event;
 import com.nju.meanlay.hiking.R;
+import com.nju.meanlay.hiking.Utils.DateUtils;
 
 import java.util.ArrayList;
 
@@ -49,6 +54,16 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
         Event event = events.get(position);
         holder.title.setText(event.getTitle());
         holder.itemView.setTag(events.get(position));
+        holder.dateTV.setText(event.getDate());
+        holder.locationTV.setText(event.getLocation());
+        if (event.getFee() == 0) {
+            holder.feeTV.setText("免费");
+        } else {
+            holder.feeTV.setText(event.getFee() + "");
+        }
+        holder.pb.setMax(DateUtils.getRestDays(event.getStartDate(),event.getDate()));
+        holder.pb.setProgress(DateUtils.getRestDays(event.getStartDate(),App.getInstance().getNowDate()));
+        Glide.with(mContext).load(Integer.valueOf(event.getImgUrl())).into(holder.img);
     }
 
     @Override
@@ -59,10 +74,20 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
     public static class EventItemHolder extends RecyclerView.ViewHolder {
         private ImageView img;
         private TextView title;
+        private ProgressBar pb;
+        private TextView dateTV;
+        private TextView memberCountTV;
+        private TextView locationTV;
+        private TextView feeTV;
         EventItemHolder(View v) {
             super(v);
             img = v.findViewById(R.id.img_event_item);
             title = v.findViewById(R.id.title_event_item);
+            pb = v.findViewById(R.id.progress_event_item);
+            dateTV = v.findViewById(R.id.date_event_item);
+            memberCountTV = v.findViewById(R.id.member_count_event_item);
+            locationTV = v.findViewById(R.id.location_event_item);
+            feeTV = v.findViewById(R.id.fee_event_item);
         }
 
     }

@@ -6,6 +6,7 @@ public class Event implements Serializable {
     private long id;
     private int status;
     private String date;
+    private String startDate;
     private String category;
     private String location;
     private String imgUrl;
@@ -14,7 +15,9 @@ public class Event implements Serializable {
     private EventMember[] waitingMembers;
     private EventMember[] joinedMembers;
     private EventMember[] rejectedMembers;
-    private long ownerId;
+    private long[] ownerIds;
+    private int memberCount;
+    private float fee;
 
     public long getId() {
         return id;
@@ -104,11 +107,35 @@ public class Event implements Serializable {
         this.location = location;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public long[] getOwnerIds() {
+        return ownerIds;
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    public void setOwnerIds(long[] ownerIds) {
+        this.ownerIds = ownerIds;
+    }
+
+    public int getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(int memberCount) {
+        this.memberCount = memberCount;
+    }
+
+    public float getFee() {
+        return fee;
+    }
+
+    public void setFee(float fee) {
+        this.fee = fee;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }

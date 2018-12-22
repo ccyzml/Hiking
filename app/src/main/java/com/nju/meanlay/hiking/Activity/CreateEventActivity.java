@@ -9,16 +9,20 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.nju.meanlay.hiking.App;
 import com.nju.meanlay.hiking.DB.DataCenter;
 import com.nju.meanlay.hiking.Manifest;
 import com.nju.meanlay.hiking.Model.Event;
+import com.nju.meanlay.hiking.Model.EventMember;
 import com.nju.meanlay.hiking.R;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -36,6 +40,8 @@ public class CreateEventActivity extends BaseActivity implements EasyPermissions
     private FrameLayout choosePhotoFL;
     private ImageView photoIV;
     private List<Uri> mSelected;
+    private String photoUrl;
+    private EditText memberCountET,feeET,locationET;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +52,9 @@ public class CreateEventActivity extends BaseActivity implements EasyPermissions
 
         createEventBtn = findViewById(R.id.create_event_btn);
         choosePhotoFL = findViewById(R.id.choose_photo);
+        memberCountET = findViewById(R.id.member_count_create_event);
+        feeET = findViewById(R.id.fee_create_event);
+        locationET = findViewById(R.id.location_create_event);
         choosePhotoFL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,13 +65,37 @@ public class CreateEventActivity extends BaseActivity implements EasyPermissions
         createEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreateEventActivity.this,EventDetailActivity.class);
-                Event event = DataCenter.getInstance().getEvents()[0];
-                intent.putExtra("event",event);
-                startActivity(intent);
+                if (checkCompleteness()){
+                    Intent intent = new Intent(CreateEventActivity.this,EventDetailActivity.class);
+                    intent.putExtra("event",createEvent());
+                    startActivity(intent);
+                    CreateEventActivity.this.finish();
+                }
             }
         });
 
+    }
+
+    private Boolean checkCompleteness(){
+        if ((photoUrl != null)&&(!memberCountET.getText().equals(""))&&(!feeET.getText().equals(""))&&(!locationET.getText().equals(""))){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private Event createEvent() {
+        Event event = new Event();
+        event.setDate("2018-1-1");
+        event.setImgUrl(R.mipmap.error_default+"");
+        event.setTitle("NEW");
+        event.setWaitingMembers(new EventMember[0]);
+        EventMember member = new EventMember();
+        member.setUser(App.getInstance().getUser());
+        EventMember[] joinedMembers = new EventMember[1];
+        joinedMembers[0] = member;
+        event.setJoinedMembers(joinedMembers);
+        return event;
     }
 
     private void openPhotos() {
@@ -88,7 +121,8 @@ public class CreateEventActivity extends BaseActivity implements EasyPermissions
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             mSelected = Matisse.obtainResult(data);
-            Glide.with(this).load(mSelected.get(0)).centerCrop().into(photoIV);
+            photoUrl = mSelected.get(0).toString();
+            Glide.with(this).load(Uri.parse(photoUrl)).centerCrop().into(photoIV);
         }
     }
 

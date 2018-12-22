@@ -35,9 +35,11 @@ public class LoginActivity extends BaseActivity {
                 user.setUniversity("南京大学");
                 user.setCollege("软件学院");
                 user.setIntroduction("haahahahahahahah");
+                user.setAvatarUrl(R.mipmap.avatar_test+"");
                 App.getInstance().setUser(user);
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
+                LoginActivity.this.finish();
 
 
             }
@@ -48,6 +50,7 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                LoginActivity.this.finish();
             }
         });
 

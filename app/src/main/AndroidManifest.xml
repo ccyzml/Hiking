@@ -36,7 +36,11 @@
         <activity android:name=".Activity.BaseActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.MyFriendsActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
+
 
     <permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
