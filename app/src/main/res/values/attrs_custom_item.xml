@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="customItemTitle" format="string"/>
+    <attr name="customItemContent" format="string"/>
+    <attr name="customItemEnableEdit" format="boolean" />
+</resources>

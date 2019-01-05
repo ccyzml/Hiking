@@ -69,4 +69,8 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.Fr
             university = itemView.findViewById(R.id.university_friend_item);
         }
     }
+
+    public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener) {
+        this.listener = listener;
+    }
 }

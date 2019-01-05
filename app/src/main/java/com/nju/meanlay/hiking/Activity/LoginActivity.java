@@ -2,6 +2,7 @@ package com.nju.meanlay.hiking.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,20 +29,24 @@ public class LoginActivity extends BaseActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Handler handler  = new Handler();
                 loginProgressBar.setVisibility(View.VISIBLE);
-                loginProgressBar.setVisibility(View.INVISIBLE);
-                User user = new User();
-                user.setNickName("Meanlay");
-                user.setUniversity("南京大学");
-                user.setCollege("软件学院");
-                user.setIntroduction("haahahahahahahah");
-                user.setAvatarUrl(R.mipmap.avatar_test+"");
-                App.getInstance().setUser(user);
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
-                LoginActivity.this.finish();
-
-
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loginProgressBar.setVisibility(View.INVISIBLE);
+                        User user = new User();
+                        user.setNickName("Meanlay");
+                        user.setUniversity("南京大学");
+                        user.setCollege("软件学院");
+                        user.setIntroduction("haahahahahahahah");
+                        user.setAvatarUrl(R.mipmap.avatar_test+"");
+                        App.getInstance().setUser(user);
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        LoginActivity.this.finish();
+                    }
+                },1000);
             }
         });
 
@@ -50,7 +55,6 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                LoginActivity.this.finish();
             }
         });
 
