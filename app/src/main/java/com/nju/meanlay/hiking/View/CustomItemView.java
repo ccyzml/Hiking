@@ -2,7 +2,9 @@ package com.nju.meanlay.hiking.View;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -10,7 +12,7 @@ import com.nju.meanlay.hiking.R;
 
 public class CustomItemView extends FrameLayout {
     private TextView titleTV;
-    private TextView contentTV;
+    private EditText contentET;
     private LayoutInflater layoutInflater;
     private Boolean enableEdit= false;
 
@@ -40,19 +42,35 @@ public class CustomItemView extends FrameLayout {
                         titleTV.setText(attrs.getAttributeValue(i));
                         break;
                     case R.attr.customItemContent:
-                        contentTV.setText(attrs.getAttributeValue(i));
+                        contentET.setText(attrs.getAttributeValue(i));
                         break;
                 }
             }
-
         }
+        if (enableEdit) {
+            contentET.setEnabled(true);
+            contentET.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        } else {
+            contentET.setEnabled(false);
+        }
+
+        contentET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                return false;
+            }
+        });
+    }
+
+    public void setContent(String content){
+        contentET.setText(content);
     }
 
     private void initView(){
         layoutInflater = LayoutInflater.from(getContext());
         FrameLayout customView = (FrameLayout) layoutInflater.inflate(R.layout.custom_item_view,this);
         titleTV = customView.findViewById(R.id.title_custom);
-        contentTV = customView.findViewById(R.id.content_custom);
+        contentET = customView.findViewById(R.id.content_custom);
 
     }
 }

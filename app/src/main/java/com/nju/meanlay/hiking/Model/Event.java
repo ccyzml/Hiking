@@ -7,14 +7,12 @@ public class Event implements Serializable {
     private int status;
     private String date;
     private String startDate;
-    private String category;
     private String location;
     private String imgUrl;
     private String title;
     private String description;
     private EventMember[] waitingMembers;
     private EventMember[] joinedMembers;
-    private EventMember[] rejectedMembers;
     private long[] ownerIds;
     private int memberCount;
     private float fee;
@@ -41,14 +39,6 @@ public class Event implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getImgUrl() {
@@ -91,13 +81,6 @@ public class Event implements Serializable {
         this.joinedMembers = joinedMembers;
     }
 
-    public EventMember[] getRejectedMembers() {
-        return rejectedMembers;
-    }
-
-    public void setRejectedMembers(EventMember[] rejectedMembers) {
-        this.rejectedMembers = rejectedMembers;
-    }
 
     public String getLocation() {
         return location;

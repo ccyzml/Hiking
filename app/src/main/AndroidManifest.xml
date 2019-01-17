@@ -42,6 +42,9 @@
         <activity android:name=".Activity.ProfileActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.EditProfileActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 

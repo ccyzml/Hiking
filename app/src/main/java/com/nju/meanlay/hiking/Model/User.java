@@ -8,7 +8,7 @@ public class User implements Serializable {
     private String nickName;
     private String introduction;
     private String avatarUrl;
-    private String University;
+    private String university;
     private String college;
     private Friend[] friends;
     private Event[] runningEvents;
@@ -56,11 +56,11 @@ public class User implements Serializable {
     }
 
     public String getUniversity() {
-        return University;
+        return university;
     }
 
     public void setUniversity(String university) {
-        University = university;
+        this.university = university;
     }
 
     public String getCollege() {

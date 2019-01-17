@@ -21,6 +21,7 @@ import com.nju.meanlay.hiking.Model.Event;
 import com.nju.meanlay.hiking.Model.EventMember;
 import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
+import com.nju.meanlay.hiking.View.CustomItemView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +35,8 @@ public class EventDetailActivity extends BaseActivity {
     private ImageView img;
     private ArrayList<EventMember> waitingMembers;
     private ArrayList<EventMember> joinedMembers;
+    private CustomItemView locationIV,feeIV,descriptionIV;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,14 @@ public class EventDetailActivity extends BaseActivity {
         waitingAdapter.showAddIcon();
         joinedAdapter.showDeleteIcon();
         img = findViewById(R.id.img_event_detail);
+
+        locationIV = findViewById(R.id.location_event_item);
+        feeIV = findViewById(R.id.fee_event_item);
+        descriptionIV = findViewById(R.id.description_event_item);
+
+        locationIV.setContent(event.getLocation());
+        feeIV.setContent(event.getFee()+"");
+
 
         waitingAdapter.setTagListener(new UserGridItemAdapter.TagClickListener<EventMember>() {
             @Override

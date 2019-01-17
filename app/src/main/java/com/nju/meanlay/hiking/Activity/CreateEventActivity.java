@@ -24,6 +24,7 @@ import com.nju.meanlay.hiking.Manifest;
 import com.nju.meanlay.hiking.Model.Event;
 import com.nju.meanlay.hiking.Model.EventMember;
 import com.nju.meanlay.hiking.R;
+import com.nju.meanlay.hiking.View.CustomItemView;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -80,12 +81,15 @@ public class CreateEventActivity extends BaseActivity implements EasyPermissions
         if ((photoUrl != null)&&(!memberCountET.getText().equals(""))&&(!feeET.getText().equals(""))&&(!locationET.getText().equals(""))){
             return true;
         }else {
+            Toast.makeText(this,"请填写完整",Toast.LENGTH_SHORT).show();
             return false;
         }
     }
 
     private Event createEvent() {
         Event event = new Event();
+        event.setLocation(locationET.getText().toString());
+        event.setFee(Float.parseFloat(feeET.getText().toString()));
         event.setDate("2018-1-1");
         event.setImgUrl(R.mipmap.error_default+"");
         event.setTitle("NEW");
