@@ -19,7 +19,6 @@ public class DateUtils {
             e.printStackTrace();
         }
         int result = (int) ((date2.getTime() - date1.getTime()) / (1000*3600*24));
-        Log.d("test",result+"");
         return result;
     }
 }

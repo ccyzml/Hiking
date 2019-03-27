@@ -10,17 +10,22 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.nju.meanlay.hiking.Adapter.MyFragmentPageAdapter;
 import com.nju.meanlay.hiking.App;
+import com.nju.meanlay.hiking.Fragment.MyEventFragment;
+import com.nju.meanlay.hiking.Fragment.TopEventFragment;
 import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
 
@@ -36,12 +41,16 @@ public class MainActivity extends AppCompatActivity
     private TextView userUniversityTV;
     private TextView userIntroductionTV;
     private CircleImageView avatar;
+    private SearchView searchView;
+    private Toolbar toolbar;
+    private LinearLayout searchLayout;
+    private ImageView cancelSearchV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -59,9 +68,13 @@ public class MainActivity extends AppCompatActivity
         pagerAdapter = new MyFragmentPageAdapter(getSupportFragmentManager(), this);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        searchView = findViewById(R.id.search);
+        searchLayout = findViewById(R.id.search_layout);
+        cancelSearchV = findViewById(R.id.cancel_search);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorWhite));
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
 
         View v  = navigationView.getHeaderView(0);
         userNameTV = v.findViewById(R.id.user_name_main);
@@ -69,6 +82,28 @@ public class MainActivity extends AppCompatActivity
         userIntroductionTV = v.findViewById(R.id.user_introduction_main);
         avatar = v.findViewById(R.id.avatar_main);
         setUserInfo();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                ((TopEventFragment)pagerAdapter.getItem(0)).getAdapter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
+        cancelSearchV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchLayout.setVisibility(View.GONE);
+                toolbar.setVisibility(View.VISIBLE);
+                searchView.clearFocus();
+                ((TopEventFragment)pagerAdapter.getItem(0)).getAdapter().cancelFilter();
+            }
+        });
     }
 
     private void setUserInfo() {
@@ -108,6 +143,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_add) {
             Intent intent = new Intent(MainActivity.this,CreateEventActivity.class);
             startActivity(intent);
+            return true;
+        } else if (id == R.id.action_search) {
+            searchLayout.setVisibility(View.VISIBLE);
+            toolbar.setVisibility(View.GONE);
             return true;
         }
 

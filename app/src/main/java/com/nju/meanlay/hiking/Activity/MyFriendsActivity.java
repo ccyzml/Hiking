@@ -25,7 +25,7 @@ public class MyFriendsActivity extends BaseActivity {
         setContentView(R.layout.activity_my_friends);
         enableBack();
         recyclerView = findViewById(R.id.recyclerview_my_friends);
-        adapter = new FriendItemAdapter(this,new ArrayList<User>(Arrays.asList(DataCenter.getInstance().getUsers())));
+        adapter = new FriendItemAdapter(this,DataCenter.getInstance().getUsers());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 

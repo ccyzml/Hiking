@@ -26,12 +26,15 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
     private ArrayList<Event> events;
+    private ArrayList<Event> filterEvents;
     private OnRecyclerItemClickListener<Event> listener;
+    private boolean isFilter = false;
 
     public EventItemAdapter(Context context, ArrayList<Event> events) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.events = events;
+        filterEvents = new ArrayList<>();
     }
 
     @NonNull
@@ -49,9 +52,30 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
         return eventItemHolder;
     }
 
+    public void filter(String s){
+        isFilter = true;
+        filterEvents.clear();
+        for (Event event:events) {
+            if (event.getTitle().contains(s)) {
+                filterEvents.add(event);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void cancelFilter() {
+        isFilter = false;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull EventItemHolder holder, int position) {
-        Event event = events.get(position);
+        Event event;
+        if (isFilter) {
+            event = filterEvents.get(position);
+        } else {
+            event = events.get(position);
+        }
         holder.title.setText(event.getTitle());
         holder.itemView.setTag(events.get(position));
         holder.dateTV.setText(event.getDate());
@@ -68,7 +92,11 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
 
     @Override
     public int getItemCount() {
-        return events.size();
+        if (isFilter) {
+            return filterEvents.size();
+        } else {
+            return events.size();
+        }
     }
 
     public static class EventItemHolder extends RecyclerView.ViewHolder {

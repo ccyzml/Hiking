@@ -5,9 +5,11 @@ import com.nju.meanlay.hiking.Model.EventMember;
 import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
 
+import java.util.ArrayList;
+
 public class DataCenter {
-    Event[] events = new Event[10];
-    User[] users = new User[10];
+    ArrayList<Event> events = new ArrayList<>();
+    ArrayList<User> users = new ArrayList<>();
     private static final DataCenter ourInstance = new DataCenter();
 
     public static DataCenter getInstance() {
@@ -21,7 +23,7 @@ public class DataCenter {
             EventMember member = new EventMember();
             User user = new User();
             member.setStatus(1);
-            user.setNickName("GuGu"+i);
+            user.setNickName("user"+i);
             user.setUniversity("南京大学");
             user.setAvatarUrl(R.mipmap.avatar_test+"");
             member.setUser(user);
@@ -31,7 +33,7 @@ public class DataCenter {
             EventMember member = new EventMember();
             User user = new User();
             member.setStatus(0);
-            user.setNickName("GuGu"+i);
+            user.setNickName("user"+i);
             user.setUniversity("南京大学");
             user.setAvatarUrl(R.mipmap.avatar_test+"");
             member.setUser(user);
@@ -53,24 +55,24 @@ public class DataCenter {
             }
             event.setJoinedMembers(joinedMembers);
             event.setWaitingMembers(waitingMembers);
-            events[i] = event;
+            events.add(event);
         }
 
         for (int i = 0 ; i<10;i++) {
             User user = new User();
-            user.setNickName("GuGu"+i);
+            user.setNickName("user"+i);
             user.setUniversity("南京大学");
             user.setAvatarUrl(R.mipmap.avatar_test+"");
-            users[i] = user;
+            users.add(user);
         }
 
     }
 
-    public Event[] getEvents() {
+    public ArrayList<Event> getEvents() {
         return events;
     }
 
-    public User[] getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 

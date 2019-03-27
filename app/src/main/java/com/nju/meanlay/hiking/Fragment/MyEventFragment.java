@@ -2,9 +2,11 @@ package com.nju.meanlay.hiking.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,10 +28,12 @@ public class MyEventFragment extends Fragment {
     RecyclerView mRecyclerView;
     StickyHeaderEventItemAdapter mAdapter;
     ArrayList<Event> events;
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        events = new ArrayList<Event>(Arrays.asList(DataCenter.getInstance().getEvents()));
+        events = DataCenter.getInstance().getEvents();
     }
 
     @Nullable
@@ -38,6 +42,8 @@ public class MyEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_event, container, false);
         mRecyclerView = view.findViewById(R.id.my_event_recycler_view);
         mAdapter = new StickyHeaderEventItemAdapter(getContext(),events);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+
         mAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<Event>() {
 
             @Override
@@ -50,6 +56,20 @@ public class MyEventFragment extends Fragment {
             @Override
             public void onLongClick(View v, Event data) {
 
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },1000);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
