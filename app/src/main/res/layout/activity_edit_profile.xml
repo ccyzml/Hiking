@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <com.nju.meanlay.hiking.View.CustomItemView
+            android:id="@+id/nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:customItemTitle = "昵称"
@@ -18,6 +19,7 @@
             />
 
         <com.nju.meanlay.hiking.View.CustomItemView
+            android:id="@+id/university"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:customItemTitle = "学校"
@@ -25,6 +27,7 @@
             />
 
         <com.nju.meanlay.hiking.View.CustomItemView
+            android:id="@+id/college"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:customItemTitle = "学院"
@@ -32,6 +35,7 @@
             />
 
         <com.nju.meanlay.hiking.View.CustomItemView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:customItemTitle = "签名"
@@ -41,6 +45,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/PinkBtnTheme"

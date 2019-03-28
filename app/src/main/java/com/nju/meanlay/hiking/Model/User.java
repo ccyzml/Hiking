@@ -1,19 +1,21 @@
 package com.nju.meanlay.hiking.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable {
     private long uid;
     private String bornDate;
     private String nickName;
     private String introduction;
-    private String avatarUrl;
+    private int avatarUrl;
     private String university;
     private String college;
     private Friend[] friends;
-    private Event[] runningEvents;
-    private Event[] comingEvents;
-    private Event[] endedEvents;
+    private ArrayList<Event> runningEvents = new ArrayList<>();
+    private ArrayList<Event> comingEvents = new ArrayList<>();
+    private ArrayList<Event> endedEvents = new ArrayList<>();
+    private ArrayList<Event> collectedEvents = new ArrayList<>();
 
     public long getUid() {
         return uid;
@@ -47,11 +49,11 @@ public class User implements Serializable {
         this.introduction = introduction;
     }
 
-    public String getAvatarUrl() {
+    public int getAvatarUrl() {
         return avatarUrl;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
+    public void setAvatarUrl(int avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
 
@@ -79,27 +81,39 @@ public class User implements Serializable {
         this.friends = friends;
     }
 
-    public Event[] getRunningEvents() {
+    public ArrayList<Event> getRunningEvents() {
         return runningEvents;
     }
 
-    public void setRunningEvents(Event[] runningEvents) {
+    public void setRunningEvents(ArrayList<Event> runningEvents) {
         this.runningEvents = runningEvents;
     }
 
-    public Event[] getComingEvents() {
+    public ArrayList<Event> getComingEvents() {
         return comingEvents;
     }
 
-    public void setComingEvents(Event[] comingEvents) {
+    public void setComingEvents(ArrayList<Event> comingEvents) {
         this.comingEvents = comingEvents;
     }
 
-    public Event[] getEndedEvents() {
+    public ArrayList<Event> getEndedEvents() {
         return endedEvents;
     }
 
-    public void setEndedEvents(Event[] endedEvents) {
+    public void setEndedEvents(ArrayList<Event> endedEvents) {
         this.endedEvents = endedEvents;
+    }
+
+    public void collect(Event event){
+        collectedEvents.add(event);
+    }
+
+    public ArrayList<Event> getCollectedEvents() {
+        return collectedEvents;
+    }
+
+    public void setCollectedEvents(ArrayList<Event> collectedEvents) {
+        this.collectedEvents = collectedEvents;
     }
 }

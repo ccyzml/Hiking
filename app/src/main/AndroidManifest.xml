@@ -41,6 +41,12 @@
         <activity android:name=".Activity.MyFriendsActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.EndedEventActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.CollectionActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Activity.ProfileActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>

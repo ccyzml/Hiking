@@ -66,11 +66,14 @@ public class CustomItemView extends FrameLayout {
         contentET.setText(content);
     }
 
+    public String getContent() {
+        return contentET.getText().toString();
+    }
+
     private void initView(){
         layoutInflater = LayoutInflater.from(getContext());
         FrameLayout customView = (FrameLayout) layoutInflater.inflate(R.layout.custom_item_view,this);
         titleTV = customView.findViewById(R.id.title_custom);
         contentET = customView.findViewById(R.id.content_custom);
-
     }
 }

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
+
         <ImageView
             android:id="@+id/img_event_item"
             android:layout_width="match_parent"
@@ -47,7 +48,14 @@
                 android:text="2018-4-12"/>
         </LinearLayout>
 
-
+        <ImageView
+            android:id="@+id/collect"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:src="@mipmap/collect"/>
 
     </FrameLayout>
 

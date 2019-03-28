@@ -11,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.nju.meanlay.hiking.App;
 import com.nju.meanlay.hiking.Interface.OnRecyclerItemClickListener;
 import com.nju.meanlay.hiking.Model.Event;
+import com.nju.meanlay.hiking.Model.TestUser;
+import com.nju.meanlay.hiking.Model.User;
 import com.nju.meanlay.hiking.R;
 import com.nju.meanlay.hiking.Utils.DateUtils;
 
@@ -29,6 +32,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
     private ArrayList<Event> filterEvents;
     private OnRecyclerItemClickListener<Event> listener;
     private boolean isFilter = false;
+    private boolean enableCollecting = true;
 
     public EventItemAdapter(Context context, ArrayList<Event> events) {
         mContext = context;
@@ -68,6 +72,10 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
         notifyDataSetChanged();
     }
 
+    public void enableCollecting(boolean b) {
+        enableCollecting = b;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull EventItemHolder holder, int position) {
         Event event;
@@ -80,10 +88,23 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
         holder.itemView.setTag(events.get(position));
         holder.dateTV.setText(event.getDate());
         holder.locationTV.setText(event.getLocation());
+        holder.memberCountTV.setText("参与人数： "+event.getJoinedMembers().length+"/"+event.getMemberCount());
         if (event.getFee() == 0) {
             holder.feeTV.setText("免费");
         } else {
             holder.feeTV.setText(event.getFee() + "");
+        }
+        if (enableCollecting) {
+            holder.collectV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TestUser.getUser().collect(event);
+                    holder.collectV.setImageResource(R.mipmap.collected);
+                    Toast.makeText(mContext,"已收藏",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            holder.collectV.setVisibility(View.GONE);
         }
         holder.pb.setMax(DateUtils.getRestDays(event.getStartDate(),event.getDate()));
         holder.pb.setProgress(DateUtils.getRestDays(event.getStartDate(),App.getInstance().getNowDate()));
@@ -107,6 +128,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
         private TextView memberCountTV;
         private TextView locationTV;
         private TextView feeTV;
+        private ImageView collectV;
         EventItemHolder(View v) {
             super(v);
             img = v.findViewById(R.id.img_event_item);
@@ -116,6 +138,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Even
             memberCountTV = v.findViewById(R.id.member_count_event_item);
             locationTV = v.findViewById(R.id.location_event_item);
             feeTV = v.findViewById(R.id.fee_event_item);
+            collectV = v.findViewById(R.id.collect);
         }
 
     }

@@ -69,7 +69,7 @@ public class EventDetailActivity extends BaseActivity {
 
         locationIV.setContent(event.getLocation());
         feeIV.setContent(event.getFee()+"");
-
+        descriptionIV.setContent(event.getDescription());
 
         waitingAdapter.setTagListener(new UserGridItemAdapter.TagClickListener<EventMember>() {
             @Override

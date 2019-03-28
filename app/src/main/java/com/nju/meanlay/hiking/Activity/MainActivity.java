@@ -3,6 +3,8 @@ package com.nju.meanlay.hiking.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private LinearLayout searchLayout;
     private ImageView cancelSearchV;
+
+    public static final int EDIT_PROFILE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,9 +167,11 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this,MyFriendsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_ended_event) {
-            Toast.makeText(this,"还在开发",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,EndedEventActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_collection) {
-            Toast.makeText(this,"还在开发",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,CollectionActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
             Toast.makeText(this,"还在开发",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_logout) {
@@ -173,11 +179,19 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_edit_profile) {
             Intent intent = new Intent(MainActivity.this,EditProfileActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,EDIT_PROFILE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode ==  EDIT_PROFILE) {
+            setUserInfo();
+        }
     }
 }

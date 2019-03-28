@@ -16,7 +16,17 @@ public class DataCenter {
         return ourInstance;
     }
 
-    private DataCenter() {
+    public static Event createEvent() {
+        Event event = new Event();
+        event.setTitle("Hiking!!!!!!!!");
+        event.setFee((float) 150.5);
+        event.setLocation("西湖");
+        event.setOwnerIds(new long[1]);
+        event.setMemberCount(20);
+        event.setDescription("一起出游吧！");
+        event.setImgUrl(R.mipmap.error_default+"");
+        event.setStartDate("2018-12-1");
+        event.setDate("2019-1-1");
         EventMember[] joinedMembers = new EventMember[10];
         EventMember[] waitingMembers = new EventMember[10];
         for (int i = 0; i < 10;i ++) {
@@ -25,7 +35,7 @@ public class DataCenter {
             member.setStatus(1);
             user.setNickName("user"+i);
             user.setUniversity("南京大学");
-            user.setAvatarUrl(R.mipmap.avatar_test+"");
+            user.setAvatarUrl(R.mipmap.avatar_test);
             member.setUser(user);
             joinedMembers[i] = member;
         }
@@ -35,7 +45,35 @@ public class DataCenter {
             member.setStatus(0);
             user.setNickName("user"+i);
             user.setUniversity("南京大学");
-            user.setAvatarUrl(R.mipmap.avatar_test+"");
+            user.setAvatarUrl(R.mipmap.avatar_test);
+            member.setUser(user);
+            waitingMembers[i] = member;
+        }
+        event.setJoinedMembers(joinedMembers);
+        event.setWaitingMembers(waitingMembers);
+        return event;
+    }
+
+    private DataCenter() {
+        EventMember[] joinedMembers = new EventMember[10];
+        EventMember[] waitingMembers = new EventMember[10];
+        for (int i = 0; i < 10;i ++) {
+            EventMember member = new EventMember();
+            User user = new User();
+            member.setStatus(1);
+            user.setNickName("user"+i);
+            user.setUniversity("南京大学");
+            user.setAvatarUrl(R.mipmap.avatar_test);
+            member.setUser(user);
+            joinedMembers[i] = member;
+        }
+        for (int i = 0; i < 10;i ++) {
+            EventMember member = new EventMember();
+            User user = new User();
+            member.setStatus(0);
+            user.setNickName("user"+i);
+            user.setUniversity("南京大学");
+            user.setAvatarUrl(R.mipmap.avatar_test);
             member.setUser(user);
             waitingMembers[i] = member;
         }
@@ -45,7 +83,8 @@ public class DataCenter {
             event.setFee((float) 150.5);
             event.setLocation("西湖"+i);
             event.setOwnerIds(new long[1]);
-            event.setMemberCount(100);
+            event.setMemberCount(20);
+            event.setDescription("一起出游吧！");
             event.setImgUrl(R.mipmap.error_default+"");
             event.setStartDate("2018-12-1");
             if(i == 0) {
@@ -62,7 +101,7 @@ public class DataCenter {
             User user = new User();
             user.setNickName("user"+i);
             user.setUniversity("南京大学");
-            user.setAvatarUrl(R.mipmap.avatar_test+"");
+            user.setAvatarUrl(R.mipmap.avatar_test);
             users.add(user);
         }
 

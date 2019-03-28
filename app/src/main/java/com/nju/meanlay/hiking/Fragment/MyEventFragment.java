@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.nju.meanlay.hiking.Activity.EventDetailActivity;
 import com.nju.meanlay.hiking.Adapter.StickyHeaderEventItemAdapter;
@@ -68,6 +69,7 @@ public class MyEventFragment extends Fragment {
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                         mAdapter.notifyDataSetChanged();
+                        Toast.makeText(getContext(),"没有更新",Toast.LENGTH_SHORT).show();
                     }
                 },1000);
             }
